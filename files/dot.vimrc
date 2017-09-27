@@ -16,6 +16,7 @@ set cpo&vim
 " Plugin settings
 execute pathogen#infect()
 nmap <C-t> :NERDTreeToggle<cr>
+let g:NERDTreeMouseMode=3
 map <F7> mzgg=G`z
 
 " Vim general settings
@@ -28,7 +29,7 @@ set nocompatible                " drop backwards compatibility for newer feature
 set showmode
 set nowrap
 set autoread                    " auto-read if file is changed externally
-"set mouse=a                    " adding mouse support
+set mouse=a                     " adding mouse support
 colorscheme nord                " color scheme source https://github.com/arcticicestudio/nord-vim
 "colorscheme slate
 "set guifont=Anonymous\ Pro\ Regular:h12

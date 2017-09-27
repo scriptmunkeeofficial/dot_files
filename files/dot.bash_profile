@@ -6,7 +6,7 @@ alias ll='ls -l'
 alias la='ls -a'
 alias vg='vagrant'
 alias vgssh='vg ssh'
-alias vgstats='vg status'
+alias vgstatus='vg status'
 
 # Replacing the default tmux command to run a custom session
 if [ -e ~/bin/tmux_default_session.sh ]
