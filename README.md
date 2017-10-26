@@ -6,20 +6,25 @@ To help me keep my dot files consistent across development machines/environments
 Once you've installed the dot files from this repo you'll have a Bash Shell ready for Ruby on Rails or Python or PHP development. TMUX & VIM will be visually in sync using Airline & PowerLine themes
 
 ## What's available
+### Dot Files
 * .bash_profile
 * .vimrc
 * .tmux.conf
 
+### Environment Setup
+* Replace or Append dot files
+* Install missing fonts
+
+
 ### Bash_Profile
 #### Alias options
-Directory Listing shorts*
-
 * ls='ls -G'
 * ll='ls -l'
 * la='ls -a'
+* term-width='tput cols'
+* term-height='tput lines'
 
 #### Vagrant
-
 * vg='vagrant'
 * vgssh='vg ssh'
 * vgstatus='vg status'
@@ -70,7 +75,7 @@ When the setup.sh script is run, this file is copied to `$HOME/bin` and an alias
 #### Plugins
 * CtrlP
 * emmet
-* fugitive
+* [fugitive](https://github.com/tpope/vim-fugitive)
 * nerdtree
 * nord-vim
 * tcomment
@@ -89,7 +94,7 @@ Clone the Git repo
 ## Install the dot files
 ### Automatically
 
-Run setup.sh
+Run setup.sh [ eventually, but until then just copy them accordingly ]
 
 ```
 cd [clone location]\dot_files

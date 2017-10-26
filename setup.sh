@@ -4,12 +4,18 @@
 # System Check
 ###############################################################################
 
+# on OS X need to check for Brew
 # need to check for Git support
 # need to check for an existing .vimrc
 # need to check for an existing .vim directory & necessary directories
 # need to check for an existing .tmux.conf
 # need to check for an existing .tmux/plugins directory
 # need to check for pathogen.vim in $HOME/.vim/autoload
+# https://github.com/tpope/vim-pathogen
+  # Install options without Git cloning & a copy
+  # mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+  # curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 
 ###############################################################################
 # For VIM
