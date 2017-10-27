@@ -64,6 +64,17 @@ You'll need this for some Git goodness in the shell. ;-)
 * tmux-urlview
 * tpm
 
+'''
+$HOME/.tmux/plugins/
+├── nord-tmux
+├── tmux-battery
+├── tmux-cpu
+├── tmux-prefix-highlight
+├── tmux-themepack
+├── tmux-urlview
+└── tpm
+'''
+
 #### Tmux Default layout
 I've included a shell script that will start Tmux with a default 3 Pane layout and 2 Windows.
 
@@ -86,6 +97,22 @@ When the setup.sh script is run, this file is copied to `$HOME/bin` and an alias
 * vim-ruby
 * vim-tumux-navigator
 
+
+$HOME/.vim/bundle/
+├── ctrlp
+├── emmet
+├── fugitive
+├── nerdtree
+├── nord-vim
+├── tcomment_vim
+├── tmuxline
+├── vim-airline
+├── vim-airline-themes
+├── vim-git
+├── vim-ruby
+└── vim-tmux-navigator
+
+
 ## Getting and Using dot files
 Clone the Git repo
 
@@ -105,3 +132,4 @@ bash setup.sh
 1. Navigate to the `[clone location]\dot_files\files` directory
 2. In the dot_files directory open the dot_* file with your favorite editor.
 3. Copy the portions you want to your dot files _(i.e. .vimrc, .tmux_confi, .bash_profile)_
+
