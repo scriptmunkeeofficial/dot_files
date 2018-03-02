@@ -9,6 +9,7 @@ alias vgssh='vg ssh'
 alias vgstatus='vg status'
 alias term-width='tput cols'
 alias term-height='tput lines'
+alias ducks='du -cks * | sort -rn | head'
 
 # Replacing the default tmux command to run a custom session
 if [ -e ~/bin/tmux_default_session.sh ]
