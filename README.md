@@ -13,8 +13,15 @@ Once you've installed the dot files from this repo you'll have a Bash Shell read
 
 ### Environment Setup
 * Replace or Append dot files
-* Install missing fonts
+* Install necessary fonts
+	* Powerline Fonts can be gotten from [Github](https://github.com/powerline/fonts)
+	* Font used is [Source Code Pro](https://github.com/powerline/fonts/tree/master/SourceCodePro)
+	* [Powerline OS X Install Guide](https://powerline.readthedocs.io/en/latest/installation/osx.html)
 
+* Install [iTerm2](https://www.iterm2.com/) for Max OS X
+	* Set Xterm2 to use the **Source Code Pro** font
+
+	![iTerm2 Font Config](https://github.com/scriptmunkeeofficial/dot_files/blob/master/resources/iterm2-fonts.png)
 
 ### Bash_Profile
 #### Alias options
@@ -56,62 +63,61 @@ You'll need this for some Git goodness in the shell. ;-)
 
 ### Tmux.conf
 #### Plugins
-* nord
-* tmux-battery
-* tmux-cpu
-* tmux-prefix-highlight
-* tmux-themepack
-* tmux-urlview
-* tpm
+* [nord]()
+* [tmux-battery]()
+* [tmux-cpu]()
+* [tmux-prefix-highlight]()
+* [tmux-themepack]()
+* [tmux-urlview]()
+* [tpm]()
 
-'''
-$HOME/.tmux/plugins/
-├── nord-tmux
-├── tmux-battery
-├── tmux-cpu
-├── tmux-prefix-highlight
-├── tmux-themepack
-├── tmux-urlview
-└── tpm
-'''
+<<make this a screenshot>>
+>$HOME/.tmux/plugins/
+>├── nord-tmux
+>├── tmux-battery
+>├── tmux-cpu
+>├── tmux-prefix-highlight
+>├── tmux-themepack
+>├── tmux-urlview
+>└── tpm
+
 
 #### Tmux Default layout
 I've included a shell script that will start Tmux with a default 3 Pane layout and 2 Windows.
 
-<< insert screenshot >>
+![Tmux-Default](https://github.com/scriptmunkeeofficial/dot_files/blob/master/resources/tmux_powered.png)
 
 When the setup.sh script is run, this file is copied to `$HOME/bin` and an alias created called `tmux-default`. Execute `tmux-default` from your terminal to make the magic happen.
 
 ### Vimrc
 #### Plugins
-* CtrlP
-* emmet
+* [CtrlP]()
+* [emmet]()
 * [fugitive](https://github.com/tpope/vim-fugitive)
-* nerdtree
-* nord-vim
-* tcomment
-* tmuxline
-* vim-airline
-* vim-airline-themes
-* vim-git
-* vim-ruby
-* vim-tumux-navigator
+* [nerdtree]()
+* [nord-vim]()
+* [tcomment]()
+* [tmuxline]()
+* [vim-airline]()
+* [vim-airline-themes]()
+* [vim-git]()
+* [vim-ruby]()
+* [vim-tumux-navigator]()
 
-
-$HOME/.vim/bundle/
-├── ctrlp
-├── emmet
-├── fugitive
-├── nerdtree
-├── nord-vim
-├── tcomment_vim
-├── tmuxline
-├── vim-airline
-├── vim-airline-themes
-├── vim-git
-├── vim-ruby
-└── vim-tmux-navigator
-
+<<make this a screenshot>>
+>$HOME/.vim/bundle/
+>├── ctrlp
+>├── emmet
+>├── fugitive
+>├── nerdtree
+>├── nord-vim
+>├── tcomment_vim
+>├── tmuxline
+>├── vim-airline
+>├── vim-airline-themes
+>├── vim-git
+>├── vim-ruby
+>└── vim-tmux-navigator
 
 ## Getting and Using dot files
 Clone the Git repo

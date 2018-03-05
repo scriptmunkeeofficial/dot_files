@@ -1,10 +1,23 @@
 #!/bin/bash
 
-tmux new-session -A -d -n 'Development' -s 'Default'
-tmux split-window -h -p 30 # spliting with 30% of the horizontal screen
-tmux selectp -t 1
-tmux split-window -v -p 40 # splititng window with 40% of the vertical screen of pane 1 (the right pane)
-tmux new-window -n 'Bash Some Shit'
-tmux selectw -t Development
-tmux selectp -t 0
-tmux attach-session -d
+# spliting the pane horizontaly in half
+# selecting the new pane (right pane)
+# resize panel 1 to 90 column wide
+# spliting the right pane in veritcaly halves
+# selecting pane 2 (lower right)
+# resize pane 2 to 30 cells/rows high
+# creating a new window with a name of 'Bash Some Shit'
+# selecting the default window, Development
+# selecting the main pane
+# attaching to the running Tmux session
+
+tmux new-session -A -d -n 'Development' -s 'Default' \; \
+  split-window -h -p 15 \; \
+  select-pane -t 1 \; \
+  split-window -v -p 30 \; \
+  select-pane -t 2 \; \
+  new-window -n 'Bash Some Shit' \; \
+  select-window -t Development \; \
+  select-pane -t 0 \; \
+  attach-session -d \; 
+

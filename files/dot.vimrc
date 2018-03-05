@@ -30,9 +30,20 @@ set showmode
 set nowrap
 set autoread                    " auto-read if file is changed externally
 set mouse=a                     " adding mouse support
-colorscheme nord                " color scheme source https://github.com/arcticicestudio/nord-vim
-"colorscheme slate
+set background=dark
+"colorscheme nord                " color scheme source https://github.com/arcticicestudio/nord-vim
+
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1   " Remove this line if using the default palette.
+colorscheme hybrid                  " color scheme source https://github.com/w0ng/vim-hybrid
+                                    " iTerm color palettes
+                                      " https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid.itermcolors
+                                      " https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid-reduced-contrast.itermcolors
+
 "set guifont=Anonymous\ Pro\ Regular:h12
+if has('gui_running')
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+endif
 
 " Search settings
 set hlsearch                    " highlight search results
@@ -58,11 +69,12 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_skip_empty_sections = 1
-"let g:airline_theme='badwolf'
-"let g:airline_theme='powerlineish'
+"let g:airline_theme='base16_spacemacs'
+let g:airline_theme='distinguished'
 
-" Tmux custom confi
-"let g:tmuxline_powerline_separators = 0
+" Tmuxline Look & Feel
+let g:tmuxline_powerline_separators = 0
+let g:airline#extensions#tmuxline#enabled = 0
 "let g:tmuxline_separators = {
 "    \ 'left' : '',
 "    \ 'left_alt': '>',
