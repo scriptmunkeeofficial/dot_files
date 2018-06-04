@@ -20,7 +20,7 @@ then
 fi
 
 # Development Environment  Settings
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
 export M2_HOME=$HOME/dev/tools/apache-maven-3.5.2
