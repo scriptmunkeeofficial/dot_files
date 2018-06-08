@@ -22,6 +22,15 @@ Once you've installed the dot files from this repo you'll have a Bash Shell read
 	* Set Xterm2 to use the **Source Code Pro** font
 
 	![iTerm2 Font Config](https://github.com/scriptmunkeeofficial/dot_files/blob/master/resources/iterm2-fonts.png)
+	
+* Application Themes
+	* Nord
+		* [Nord for iTerm](https://github.com/arcticicestudio/nord-iterm2)
+		* [Nord for Vim](https://github.com/arcticicestudio/nord-vim)
+		* [Nord for Tmux](https://github.com/arcticicestudio/nord-tmux)
+	* Hybrid
+		* [iTerm](https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid.itermcolors)
+		* [Vim](https://github.com/w0ng/vim-hybrid)
 
 ### Bash_Profile
 #### Alias options
@@ -94,6 +103,7 @@ When the setup.sh script is run, this file is copied to `$HOME/bin` and an alias
 * [CtrlP]()
 * [emmet]()
 * [fugitive](https://github.com/tpope/vim-fugitive)
+* [lightline]()
 * [nerdtree]()
 * [nord-vim]()
 * [tcomment]()
@@ -101,22 +111,29 @@ When the setup.sh script is run, this file is copied to `$HOME/bin` and an alias
 * [vim-airline]()
 * [vim-airline-themes]()
 * [vim-git]()
+* [vim-hybrid]()
+* [vim-log-syntax]()
 * [vim-ruby]()
+* [vim-tmux]()
 * [vim-tumux-navigator]()
 
 <<make this a screenshot>>
 >$HOME/.vim/bundle/
 >├── ctrlp
->├── emmet
->├── fugitive
+>├── emmet-vim
+>├── lightline.vim
 >├── nerdtree
 >├── nord-vim
 >├── tcomment_vim
->├── tmuxline
+>├── tmuxline.vim
 >├── vim-airline
 >├── vim-airline-themes
+>├── vim-fugitive
 >├── vim-git
+>├── vim-hybrid
+>├── vim-log-syntax
 >├── vim-ruby
+>├── vim-tmux
 >└── vim-tmux-navigator
 
 ## Getting and Using dot files
