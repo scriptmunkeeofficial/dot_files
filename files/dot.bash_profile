@@ -21,7 +21,7 @@ fi
 export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
-export M2_HOME=$HOME/dev/tools/apache-maven-3.3.9
+export M2_HOME=$HOME/dev/tools/apache-maven-3.5.3
 export MAVEN_HOME=$M2_HOME
 
 # Termainal Settings

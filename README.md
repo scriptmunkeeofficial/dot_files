@@ -15,7 +15,7 @@ Once you've installed the dot files from this repo you'll have a Bash Shell read
 * Replace or Append dot files
 * Install necessary fonts
 	* Powerline Fonts can be gotten from [Github](https://github.com/powerline/fonts)
-	* Font used is [Source Code Pro](https://github.com/powerline/fonts/tree/master/SourceCodePro)
+	* Font used is [Source Code Pro](https://github.com/powerline/fonts/tree/master/SourceCodePro) & [Anonymous Pro](https://github.com/powerline/fonts/tree/master/AnonymousPro)
 	* [Powerline OS X Install Guide](https://powerline.readthedocs.io/en/latest/installation/osx.html)
 
 * Install [iTerm2](https://www.iterm2.com/) for Max OS X
@@ -31,6 +31,12 @@ Once you've installed the dot files from this repo you'll have a Bash Shell read
 	* Hybrid
 		* [iTerm](https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid.itermcolors)
 		* [Vim](https://github.com/w0ng/vim-hybrid)
+
+* System Requirements
+  * [Brew](https://brew.sh/) 
+    * urlview
+    * tmux
+    * reattach-to-user-namespace
 
 ### Bash_Profile
 #### Alias options
@@ -72,24 +78,16 @@ You'll need this for some Git goodness in the shell. ;-)
 
 ### Tmux.conf
 #### Plugins
-* [nord]()
-* [tmux-battery]()
-* [tmux-cpu]()
-* [tmux-prefix-highlight]()
-* [tmux-themepack]()
-* [tmux-urlview]()
-* [tpm]()
+* [tpm](https://github.com/tmux-plugins/tpm)
+* [tmux-battery](https://github.com/tmux-plugins/tmux-battery)
+* [tmux-cpu](https://github.com/tmux-plugins/tmux-cpu)
+* [tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
+* [tmux-themepack](https://github.com/jimeh/tmux-themepack)
+* [tmux-urlview](https://github.com/tmux-plugins/tmux-urlview)
+* [tmux-themepack](https://github.com/jimeh/tmux-themepack.git)
+* [nord](https://github.com/arcticicestudio/nord-iterm2)
 
-<<make this a screenshot>>
->$HOME/.tmux/plugins/
->├── nord-tmux
->├── tmux-battery
->├── tmux-cpu
->├── tmux-prefix-highlight
->├── tmux-themepack
->├── tmux-urlview
->└── tpm
-
+[add screenshot here]
 
 #### Tmux Default layout
 I've included a shell script that will start Tmux with a default 3 Pane layout and 2 Windows.
@@ -100,22 +98,22 @@ When the setup.sh script is run, this file is copied to `$HOME/bin` and an alias
 
 ### Vimrc
 #### Plugins
-* [CtrlP]()
-* [emmet]()
+* [CtrlP](https://github.com/kien/ctrlp.vim)
+* [emmet](https://github.com/mattn/emmet-vim)
 * [fugitive](https://github.com/tpope/vim-fugitive)
-* [lightline]()
-* [nerdtree]()
-* [nord-vim]()
-* [tcomment]()
-* [tmuxline]()
-* [vim-airline]()
-* [vim-airline-themes]()
-* [vim-git]()
-* [vim-hybrid]()
-* [vim-log-syntax]()
-* [vim-ruby]()
-* [vim-tmux]()
-* [vim-tumux-navigator]()
+* [lightline](https://github.com/itchyny/lightline.vim)
+* [nerdtree](https://github.com/scrooloose/nerdtree.git)
+* [nord-vim](https://github.com/arcticicestudio/nord-vim)
+* [tcomment](https://github.com/tomtom/tcomment_vim)
+* [tmuxline](https://github.com/edkolev/tmuxline.vim)
+* [vim-airline](https://github.com/vim-airline/vim-airline)
+* [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
+* -vim-git-
+* [vim-hybrid](https://github.com/w0ng/vim-hybrid)
+* [vim-log-syntax](https://github.com/dzeban/vim-log-syntax)
+* [vim-ruby](https://github.com/vim-ruby/vim-ruby)
+* [vim-tmux](https://github.com/tmux-plugins/vim-tmux)
+* [vim-tumux-navigator](https://github.com/christoomey/vim-tmux-navigator)
 
 <<make this a screenshot>>
 >$HOME/.vim/bundle/
