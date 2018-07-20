@@ -19,7 +19,7 @@ Once you've installed the dot files from this repo you'll have a Bash Shell read
 	* [Powerline OS X Install Guide](https://powerline.readthedocs.io/en/latest/installation/osx.html)
 
 * Install [iTerm2](https://www.iterm2.com/) for Max OS X
-	* Set Xterm2 to use the **Source Code Pro** font
+	* Set iTerm2 to use the **Source Code Pro** font
 
 	![iTerm2 Font Config](https://github.com/scriptmunkeeofficial/dot_files/blob/master/resources/iterm2-fonts.png)
 	
