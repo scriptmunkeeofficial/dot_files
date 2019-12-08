@@ -18,6 +18,7 @@ execute pathogen#infect()
 nmap <C-t> :NERDTreeToggle<cr>
 let g:NERDTreeMouseMode=3
 map <F7> mzgg=G`z
+nmap gg=J :%!python -m json.tool
 
 " Vim general settings
 filetype plugin indent on
@@ -30,19 +31,20 @@ set showmode
 set nowrap
 set autoread                    " auto-read if file is changed externally
 set mouse=a                     " adding mouse support
+set clipboard=unnamed           " support for copy/paste with reattach-touser-namespace
 set background=dark
-"colorscheme nord                " color scheme source https://github.com/arcticicestudio/nord-vim
+colorscheme nord                " color scheme source https://github.com/arcticicestudio/nord-vim
 
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1   " Remove this line if using the default palette.
-colorscheme hybrid                  " color scheme source https://github.com/w0ng/vim-hybrid
-                                    " iTerm color palettes
-                                      " https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid.itermcolors
-                                      " https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid-reduced-contrast.itermcolors
+"let g:hybrid_custom_term_colors = 1
+"let g:hybrid_reduced_contrast = 1   " Remove this line if using the default palette.
+"colorscheme hybrid                  " color scheme source https://github.com/w0ng/vim-hybrid
+" iTerm color palettes
+" https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid.itermcolors
+" https://raw.githubusercontent.com/w0ng/dotfiles/master/iterm2/hybrid-reduced-contrast.itermcolors
 
 "set guifont=Anonymous\ Pro\ Regular:h12
 if has('gui_running')
-  set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 endif
 
 " Search settings
@@ -52,9 +54,9 @@ set smartcase                   " ignore case if search pattern is all lowercase
 set ignorecase                  " ignore case when searching
 
 " tab settings
-set tabstop=2                   " a tab is two spaces
-set softtabstop=2               " when hitting <BS>, pretend like a tab is removed, even if spaces
-set shiftwidth=2                " number of spaces to use for autoindenting
+set tabstop=4                   " a tab is two spaces
+set softtabstop=4               " when hitting <BS>, pretend like a tab is removed, even if spaces
+set shiftwidth=4                " number of spaces to use for autoindenting
 set smarttab
 set smartindent
 set autoindent                  " always set autoindenting on
@@ -70,7 +72,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_skip_empty_sections = 1
 "let g:airline_theme='base16_spacemacs'
-let g:airline_theme='distinguished'
+"let g:airline_theme='distinguished'
 
 " Tmuxline Look & Feel
 let g:tmuxline_powerline_separators = 0
@@ -82,7 +84,12 @@ let g:airline#extensions#tmuxline#enabled = 0
 "    \ 'right_alt' : '<',
 "    \ 'space' : ' '}
 
-"
+" CtrlP configurations
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|results'
+
+" Vim-Polyglot Settings
+let g:javascript_plugin_jsdoc = 1
+
 " Global default options
 "
 
@@ -108,28 +115,28 @@ set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
 "   let macvim_skip_cmd_opt_movement = 1
 " to ~/.vimrc.
 if !exists("macvim_skip_cmd_opt_movement")
-  no   <D-Left>       <Home>
-  no!  <D-Left>       <Home>
-  no   <M-Left>       <C-Left>
-  no!  <M-Left>       <C-Left>
+    no   <D-Left>       <Home>
+    no!  <D-Left>       <Home>
+    no   <M-Left>       <C-Left>
+    no!  <M-Left>       <C-Left>
 
-  no   <D-Right>      <End>
-  no!  <D-Right>      <End>
-  no   <M-Right>      <C-Right>
-  no!  <M-Right>      <C-Right>
+    no   <D-Right>      <End>
+    no!  <D-Right>      <End>
+    no   <M-Right>      <C-Right>
+    no!  <M-Right>      <C-Right>
 
-  no   <D-Up>         <C-Home>
-  ino  <D-Up>         <C-Home>
-  no   <M-Up>         {
-  ino  <M-Up>         <C-o>{
+    no   <D-Up>         <C-Home>
+    ino  <D-Up>         <C-Home>
+    no   <M-Up>         {
+    ino  <M-Up>         <C-o>{
 
-  no   <D-Down>       <C-End>
-  ino  <D-Down>       <C-End>
-  no   <M-Down>       }
-  ino  <M-Down>       <C-o>}
+    no   <D-Down>       <C-End>
+    ino  <D-Down>       <C-End>
+    no   <M-Down>       }
+    ino  <M-Down>       <C-o>}
 
-  ino  <M-BS>         <C-w>
-  ino  <D-BS>         <C-u>
+    ino  <M-BS>         <C-w>
+    ino  <D-BS>         <C-u>
 endif " !exists("macvim_skip_cmd_opt_movement")
 
 
@@ -138,32 +145,32 @@ endif " !exists("macvim_skip_cmd_opt_movement")
 "   let macvim_hig_shift_movement = 1
 " to ~/.vimrc.
 if exists("macvim_hig_shift_movement")
-  " Shift + special movement key (<S-Left>, etc.) and mouse starts insert mode
-  set selectmode=mouse,key
-  set keymodel=startsel,stopsel
+    " Shift + special movement key (<S-Left>, etc.) and mouse starts insert mode
+    set selectmode=mouse,key
+    set keymodel=startsel,stopsel
 
-  " HIG related shift + special movement key mappings
-  nn   <S-D-Left>     <S-Home>
-  vn   <S-D-Left>     <S-Home>
-  ino  <S-D-Left>     <S-Home>
-  nn   <S-M-Left>     <S-C-Left>
-  vn   <S-M-Left>     <S-C-Left>
-  ino  <S-M-Left>     <S-C-Left>
+    " HIG related shift + special movement key mappings
+    nn   <S-D-Left>     <S-Home>
+    vn   <S-D-Left>     <S-Home>
+    ino  <S-D-Left>     <S-Home>
+    nn   <S-M-Left>     <S-C-Left>
+    vn   <S-M-Left>     <S-C-Left>
+    ino  <S-M-Left>     <S-C-Left>
 
-  nn   <S-D-Right>    <S-End>
-  vn   <S-D-Right>    <S-End>
-  ino  <S-D-Right>    <S-End>
-  nn   <S-M-Right>    <S-C-Right>
-  vn   <S-M-Right>    <S-C-Right>
-  ino  <S-M-Right>    <S-C-Right>
+    nn   <S-D-Right>    <S-End>
+    vn   <S-D-Right>    <S-End>
+    ino  <S-D-Right>    <S-End>
+    nn   <S-M-Right>    <S-C-Right>
+    vn   <S-M-Right>    <S-C-Right>
+    ino  <S-M-Right>    <S-C-Right>
 
-  nn   <S-D-Up>       <S-C-Home>
-  vn   <S-D-Up>       <S-C-Home>
-  ino  <S-D-Up>       <S-C-Home>
+    nn   <S-D-Up>       <S-C-Home>
+    vn   <S-D-Up>       <S-C-Home>
+    ino  <S-D-Up>       <S-C-Home>
 
-  nn   <S-D-Down>     <S-C-End>
-  vn   <S-D-Down>     <S-C-End>
-  ino  <S-D-Down>     <S-C-End>
+    nn   <S-D-Down>     <S-C-End>
+    vn   <S-D-Down>     <S-C-End>
+    ino  <S-D-Down>     <S-C-End>
 endif " exists("macvim_hig_shift_movement")
 
 
