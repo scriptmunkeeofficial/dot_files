@@ -12,12 +12,12 @@
 # attaching to the running Tmux session
 
 tmux new-session -A -d -n 'Development' -s 'Default' \; \
-  split-window -h -p 15 \; \
+  split-window -h -p 5 \; \
   select-pane -t 1 \; \
-  split-window -v -p 30 \; \
+  split-window -t 1 -v -p 30 \; \
   select-pane -t 2 \; \
   new-window -n 'Bash Some Shit' \; \
   select-window -t Development \; \
   select-pane -t 0 \; \
-  attach-session -d \; 
+  attach-session -d \;
 

@@ -14,7 +14,9 @@
 
 # Need to check for Tmux TPM
 
-brew install tmux urlview reattach-to-user-namespace
+brew tap universal-ctags/universal-ctags
+brew install tmux urlview reattach-to-user-namespace docker docker-compose sqlite vim wget
+brew install --HEAD universal-ctags
 
 ###############################################################################
 # For VIM

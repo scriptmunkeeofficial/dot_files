@@ -17,6 +17,10 @@ Once you've installed the dot files from this repo you'll have a Bash Shell read
 	* Powerline Fonts can be gotten from [Github](https://github.com/powerline/fonts)
 	* Font used is [Source Code Pro](https://github.com/powerline/fonts/tree/master/SourceCodePro) & [Anonymous Pro](https://github.com/powerline/fonts/tree/master/AnonymousPro)
 	* [Powerline OS X Install Guide](https://powerline.readthedocs.io/en/latest/installation/osx.html)
+	* Nerd Fonts
+		* [Anonymice Pro](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/AnonymousPro.zip)
+		* [LiterationMono](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/LiberationMono.zip)
+		* [3270 Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/3270.zip)
 
 * Install [iTerm2](https://www.iterm2.com/) for Max OS X
 	* Set iTerm2 to use the **Source Code Pro** font
