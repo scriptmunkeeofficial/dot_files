@@ -117,7 +117,8 @@ function parse_git_dirty {
 # export PS1="\n[\[\e[34m\]Ken\[\e[m\]]: \[\e[32m\]\w\[\e[m\]\n\[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[32m\]<\[\e[m\]\[\e[32m\]>\[\e[m\] "
 # export PS1="\n{\[\e[34m\]\u\[\e[m\]} \[\e[32m\]@\[\e[m\] {\[\e[34m\]\h\[\e[m\]}: \[\e[32m\]\w\[\e[m\]\n\[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[32m\]<\[\e[m\]\[\e[32m\]>\[\e[m\] "
 # export PS1="\n\[\e[33;44m\] \w \[\e[m\]\[\e[34;43m\]\`parse_git_branch\`\[\e[m\]\n \[\e[33m\]\\$\[\e[m\] "
-export PS1="\n\[\e[30;47m\] \w \[\e[m\]\[\e[44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+# export PS1="\n\[\e[30;47m\] \w \[\e[m\]\[\e[44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+export PS1="\n\[\e[30;47m\][\h] \w \[\e[m\]\[\e[44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
