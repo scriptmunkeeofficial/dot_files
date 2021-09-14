@@ -36,13 +36,12 @@ export M2_HOME=$HOME/dev/tools/apache-maven-3.5.3
 export MAVEN_HOME=$M2_HOME
 
 # From HOMEBREW
-export HOMEBREW_GITHUB_API_TOKEN="f00d3d11192427d74f505c73b5c8ef7174a83ceb"
+export HOMEBREW_GITHUB_API_TOKEN=" ADD ME "
 #For compilers to find ncurses you may need to set:
 export LDFLAGS="-L/usr/local/opt/ncurses/lib"
 export CPPFLAGS="-I/usr/local/opt/ncurses/include"
 #For pkg-config to find ncurses you may need to set:
 export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
-
 
 # Termainal Settings
 #export TERM="xterm-color"
