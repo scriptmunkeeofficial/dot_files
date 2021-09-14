@@ -25,7 +25,7 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
 export M2_HOME=$HOME/dev/tools/apache-maven-3.5.3
 export MAVEN_HOME=$M2_HOME
-export HOMEBREW_GITHUB_API_TOKEN="8c38fed159d2d7f61975ad57dd93a48e209b2b16"
+export HOMEBREW_GITHUB_API_TOKEN=" ADD ME "
 
 # Termainal Settings
 # export PS1="[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m]\$ "
