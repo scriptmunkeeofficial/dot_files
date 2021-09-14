@@ -35,27 +35,16 @@ else
 fi
 
 # Setting up Vim plugin manager/loader Pathogen
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+#curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # Getting Plugins from Github
-cd ~/.vim/bundle
-git clone https://github.com/christoomey/vim-tmux-navigator.git
-git clone https://github.com/tmux-plugins/vim-tmux.git
-git clone https://github.com/vim-ruby/vim-ruby.git
-git clone https://github.com/dzeban/vim-log-syntax.git
-git clone https://github.com/tpope/vim-fugitive.git
-git clone https://github.com/vim-airline/vim-airline.git
-git clone https://github.com/vim-airline/vim-airline-themes.git
-git clone https://github.com/edkolev/tmuxline.vim.git
-git clone https://github.com/tomtom/tcomment_vim.git
-git clone https://github.com/arcticicestudio/nord-vim.git
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/itchyny/lightline.vim.git
-git clone https://github.com/mattn/emmet-vim.git
-git clone https://github.com/kien/ctrlp.vim.git
-git clone https://github.com/w0ng/vim-hybrid.git
+#cd ~/.vim/bundle
+#git clone https://github.com/tmux-plugins/vim-tmux.git
+#git clone https://github.com/dzeban/vim-log-syntax.git
+#git clone https://github.com/edkolev/tmuxline.vim.git
+#git clone https://github.com/itchyny/lightline.vim.git
 
-ln -s $current_path/vim-hybrid/colors/hybrid.vim ~/.vim/colors/
+#ln -s $current_path/vim-hybrid/colors/hybrid.vim ~/.vim/colors/
 
 # simlink dot.vimrc to ~/.vimrc
 if [ ! -f ~/.vimrc ] || [ ! -L ~/.vimrc ] ; then
