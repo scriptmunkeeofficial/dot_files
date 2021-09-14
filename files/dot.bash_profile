@@ -29,7 +29,7 @@ fi
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Development Environment  Settings
-export JAVA_HOME="$(/usr/libexec/java_home -v 11.0.5)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 16.0.2)"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
 export M2_HOME=$HOME/dev/tools/apache-maven-3.5.3
@@ -57,6 +57,12 @@ export PATH=$HOME/bin:$HOME/dev/tools:$M2_HOME/bin:$JAVA_HOME/bin:$ANDROID_HOME/
 # bash-completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
+# Node nvm support
+export NVM_DIR="$HOME/.nvm"
+[[ -s "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
+[[ -s "/usr/local/opt/nvm/etc/bash_completion" ]] && . "/usr/local/opt/nvm/etc/bash_completion" # This loads nvm bash_completion
+
+# Ruby rvm support
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # get current branch in git repo

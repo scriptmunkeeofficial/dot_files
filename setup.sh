@@ -15,8 +15,41 @@
 # Need to check for Tmux TPM
 
 brew tap universal-ctags/universal-ctags
-brew install tmux urlview reattach-to-user-namespace docker docker-compose sqlite vim wget
+brew install tmux urlview reattach-to-user-namespace sqlite vim wget svn bat bash-completion
 brew install --HEAD universal-ctags
+brew install --cask visual-studio-code macvim docker
+
+###############################################################################
+# For Fonts
+###############################################################################
+
+brew tap homebrew/cask-fonts
+brew install --cask font-source-code-pro-for-powerline font-anonymous-pro font-liberation-nerd-font font-3270-nerd-font font-anonymice-nerd-font
+
+if [ ! -d fonts ]; then
+  mkdir fonts
+fi
+
+cd fonts
+git clone https://github.com/powerline/fonts.git powerilne-fonts
+cd powerline-fonts
+./install.sh
+
+cd ../../
+
+
+###############################################################################
+# For iTerm2
+###############################################################################
+
+if [ ! -d themes ]; then
+  mkdir themes
+fi
+
+cd themes
+curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Hybrid.itermcolors -o Hybrid.itermcolors
+curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/nord.itermcolors -o nord.itermcolors
+cd ../
 
 ###############################################################################
 # For VIM
@@ -52,8 +85,6 @@ if [ ! -f ~/.vimrc ] || [ ! -L ~/.vimrc ] ; then
 else
     echo 'WARNING: .vimrc already exists'
 fi
-
-
 
 ###############################################################################
 # For Tmux
