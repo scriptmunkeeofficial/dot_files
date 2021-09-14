@@ -14,7 +14,9 @@
 
 # Need to check for Tmux TPM
 
-brew install tmux urlview reattach-to-user-namespace
+brew tap universal-ctags/universal-ctags
+brew install tmux urlview reattach-to-user-namespace docker docker-compose sqlite vim wget
+brew install --HEAD universal-ctags
 
 ###############################################################################
 # For VIM
@@ -56,7 +58,7 @@ git clone https://github.com/w0ng/vim-hybrid.git
 ln -s $current_path/vim-hybrid/colors/hybrid.vim ~/.vim/colors/
 
 # simlink dot.vimrc to ~/.vimrc
-if [ ! -f ~/.vimrc ] ; then
+if [ ! -f ~/.vimrc ] || [ ! -L ~/.vimrc ] ; then
     ln -s $current_path/files/dot.vimrc ~/.vimrc
 else
     echo 'WARNING: .vimrc already exists'
@@ -85,7 +87,7 @@ git clone https://github.com/arcticicestudio/nord-tmux.git
 cd ~/
 
 # simlink dot.tmux.conf to ~/.tmux.conf
-if [ ! -f ~/.tmux.conf ] ; then
+if [ ! -f ~/.tmux.conf ] || [ ! -L ~/.tmux.conf ] ; then
       ln -s $current_path/files/dot.tmux.conf ~/.tmux.conf
 else
     echo 'WARNING: .tmux.conf already exists'
@@ -103,6 +105,7 @@ if [ ! -d ~/bin ] ; then
 fi
 
 ln -s $current_path/src/tmux_default_session.sh ~/bin/
+ln -s $current_path/src/tmux-7-dwarfs.sh ~/bin/
 
 ###############################################################################
 # For Bash
@@ -111,7 +114,7 @@ ln -s $current_path/src/tmux_default_session.sh ~/bin/
 # append or replace .bash_profile
 # I might want to move the org & create an simlink to the dot.bash_profile file
 
-if [ ! -f ~/.bash_profile ] ; then
+if [ ! -f ~/.bash_profile ] || [ ! -L ~/.bash_profile ] ; then
     ln -s $current_path/files/dot.bash_profile ~/.bash_profile
 else
     'WARNING: .bash_profile already exists'
