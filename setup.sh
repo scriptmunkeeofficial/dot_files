@@ -1,45 +1,46 @@
 #!/bin/sh
 
 ###############################################################################
-# System Check
+# Initialization Check
 ###############################################################################
 
-# on OS X need to check for Brew
-# need to check for Git support
-# need to check for an existing .vimrc
-# need to check for an existing .vim directory & necessary directories
-# need to check for an existing .tmux.conf
-# need to check for an existing .tmux/plugins directory
-# need to check for pathogen.vim in $HOME/.vim/autoload
+# check if Homebrew is installed
+if ! command -v brew 2>&1 >/dev/null; then
+  echo 'Homebrew not install, so lets get that installed first'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-# Need to check for Tmux TPM
+###############################################################################
+# Install base applications
+###############################################################################
 
 brew tap universal-ctags/universal-ctags
-brew install tmux urlview reattach-to-user-namespace sqlite vim wget svn bat bash-completion
+brew install tmux urlview reattach-to-user-namespace sqlite vim wget svn bat bash-completion yazi fzf ffmpeg the_silver_searcher zoxide
 brew install --HEAD universal-ctags
-brew install --cask visual-studio-code macvim docker
+brew install --cask visual-studio-code macvim orbstack tableplus discord raycask rectangle disk-inventroy-x
 
 ###############################################################################
-# For Fonts
+# Install Fonts
 ###############################################################################
 
 brew tap homebrew/cask-fonts
-brew install --cask font-source-code-pro-for-powerline font-anonymous-pro font-liberation-nerd-font font-3270-nerd-font font-anonymice-nerd-font
+brew install --cask font-source-code-pro-for-powerline font-anonymous-pro font-liberation-nerd-font font-3270-nerd-font font-anonymice-nerd-font font-menlo-for-powerline
 
-if [ ! -d fonts ]; then
-  mkdir fonts
-fi
+# No longer needed, but will leave for prosperity
+# if [ ! -d fonts ]; then
+#   mkdir fonts
+# fi
 
-cd fonts
-git clone https://github.com/powerline/fonts.git powerilne-fonts
-cd powerline-fonts
-./install.sh
-
-cd ../../
+# cd fonts
+# git clone https://github.com/powerline/fonts.git --depth=1 powerline-fonts
+# cd powerline-fonts
+# ./install.sh
+#
+# cd ../../
 
 
 ###############################################################################
-# For iTerm2
+# iTerm2 Setup
 ###############################################################################
 
 if [ ! -d themes ]; then
@@ -52,32 +53,17 @@ curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/sch
 cd ../
 
 ###############################################################################
-# For VIM
+# VIM Setup
 ###############################################################################
 
 current_path=$(pwd)
 echo "Current Path is: $current_paht"
 
-# clone all the necessary Git repos
-# https://github.com/tpope/vim-pathogen
-# Install options without Git cloning & a copy
 if [ ! -d !/.vim/autoload ] ; then
     mkdir -p ~/.vim/autoload ~/.vim/bundle ~/.vim/colors
 else
     echo 'WARNING: .vim folder already exists'
 fi
-
-# Setting up Vim plugin manager/loader Pathogen
-#curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-# Getting Plugins from Github
-#cd ~/.vim/bundle
-#git clone https://github.com/tmux-plugins/vim-tmux.git
-#git clone https://github.com/dzeban/vim-log-syntax.git
-#git clone https://github.com/edkolev/tmuxline.vim.git
-#git clone https://github.com/itchyny/lightline.vim.git
-
-#ln -s $current_path/vim-hybrid/colors/hybrid.vim ~/.vim/colors/
 
 # simlink dot.vimrc to ~/.vimrc
 if [ ! -f ~/.vimrc ] || [ ! -L ~/.vimrc ] ; then
@@ -86,25 +72,20 @@ else
     echo 'WARNING: .vimrc already exists'
 fi
 
+# insalling Vim plugins
+vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+
+# install Coc Extensions
+vim -c "CocInstall -sync coc-json coc-html coc-tsserver coc-phpls coc-python coc-git coc-eslint coc-sql coc-xml coc-yaml |qall"
+
 ###############################################################################
-# For Tmux
+# Tmux Setup
 ###############################################################################
 
 # clone all the necessary Git repos
 if [ ! -d ~/.tmux/plugins ] ; then
   mkdir -p ~/.tmux/plugins
 fi
-
-cd ~/.tmux/plugins/
-git clone https://github.com/tmux-plugins/tpm.git
-git clone https://github.com/tmux-plugins/tmux-battery.git
-git clone https://github.com/tmux-plugins/tmux-cpu.git
-git clone https://github.com/tmux-plugins/tmux-prefix-highlight.git
-git clone https://github.com/tmux-plugins/tmux-urlview.git
-git clone https://github.com/jimeh/tmux-themepack.git
-git clone https://github.com/arcticicestudio/nord-tmux.git
-
-cd ~/
 
 # simlink dot.tmux.conf to ~/.tmux.conf
 if [ ! -f ~/.tmux.conf ] || [ ! -L ~/.tmux.conf ] ; then
@@ -113,13 +94,18 @@ else
     echo 'WARNING: .tmux.conf already exists'
 fi
 
+# install tpm
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
+# simlink theme file
 if [ ! -f ~/.tmux/tmuxline.theme ] ; then
       ln -s $current_path/files/tmuxline.theme ~/.tmux/
 else
     echo 'WARNING: .tmux.conf already exists'
 fi
 
-# Adding Tmux Default Session to the PATH
+# Adding Tmux Default Sessions to the PATH
 if [ ! -d ~/bin ] ; then
   mkdir ~/bin
 fi
@@ -128,15 +114,42 @@ ln -s $current_path/src/tmux_default_session.sh ~/bin/
 ln -s $current_path/src/tmux-7-dwarfs.sh ~/bin/
 
 ###############################################################################
-# For Bash
+# Bash Setup
 ###############################################################################
 
-# append or replace .bash_profile
-# I might want to move the org & create an simlink to the dot.bash_profile file
-
-if [ ! -f ~/.bash_profile ] || [ ! -L ~/.bash_profile ] ; then
+if [ ! -f ~/.bash_profile ]; then
     ln -s $current_path/files/dot.bash_profile ~/.bash_profile
 else
     'WARNING: .bash_profile already exists'
 fi
 
+if [ ! -f ~/.local_shell_profile ] || [ ! -L ~/.local_shell_profile ] ; then
+  touch ~/.local_shell_profile
+
+  cat <<'EOF' >> ~/.local_shell_profile
+#!/bin/sh
+
+# Local shell profile settings
+echo "Add your personal shell profile attributes here" # <--- delete this line
+
+
+################################################################################
+# Aliases
+################################################################################
+
+
+################################################################################
+# Environment Variables
+################################################################################
+
+
+################################################################################
+# PATH Additions
+################################################################################
+
+
+EOF
+
+else
+  echo '~/.local_shell_profile already exists'
+fi

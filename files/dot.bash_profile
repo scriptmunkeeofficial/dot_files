@@ -1,6 +1,12 @@
 #!/bin/sh
 
+if [ -f ~/.local_shell_profile ]; then
+  source ~/.local_shell_profile
+fi
+
+################################################################################
 # Alias options
+################################################################################
 alias ls='ls -G'
 alias ll='ls -lh'
 alias la='ls -a'
@@ -17,53 +23,27 @@ alias vi='vim'
 alias weather='curl wttr.in'
 alias docker-attach='eval $(docker-machine env default)'
 alias audio-restart='sudo killall coreaudiod'
-alias web-timer='curl -s -w '\''Testing Response Time (seconds) for: %{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\n\nTotal Time:\t\t%{time_total}\n'\'' -o /dev/null'
-
-# Replacing the default tmux command to run a custom session
-if [ -e ~/bin/tmux_default_session.sh ]
-then
+if [ -e ~/bin/tmux_default_session.sh ]; then
   alias tmux-default='~/bin/tmux_default_session.sh'
 fi
 
+
+################################################################################
+# Termainal Settings
+################################################################################
+
 # Shutting up MacOS Catalina because I like Bash
 export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# Development Environment  Settings
-export JAVA_HOME="$(/usr/libexec/java_home -v 16.0.2)"
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
-export M2_HOME=$HOME/dev/tools/apache-maven-3.5.3
-export MAVEN_HOME=$M2_HOME
-
-# From HOMEBREW
-export HOMEBREW_GITHUB_API_TOKEN=" ADD ME "
-#For compilers to find ncurses you may need to set:
-export LDFLAGS="-L/usr/local/opt/ncurses/lib"
-export CPPFLAGS="-I/usr/local/opt/ncurses/include"
-#For pkg-config to find ncurses you may need to set:
-export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
-
-# Termainal Settings
-#export TERM="xterm-color"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export GREP_OPTIONS='--color=auto'
-
-export SOURCE_HOME=$HOME/dev/src/platform
-
-# Environment Settings
-export PATH=$HOME/bin:$HOME/dev/tools:$M2_HOME/bin:$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$HOME/.rvm/bin:/usr/local/opt/ncurses/bin:$PATH
+export BAT_THEME='gruvbox-dark'
 
 # bash-completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
-# Node nvm support
-export NVM_DIR="$HOME/.nvm"
-[[ -s "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
-[[ -s "/usr/local/opt/nvm/etc/bash_completion" ]] && . "/usr/local/opt/nvm/etc/bash_completion" # This loads nvm bash_completion
-
-# Ruby rvm support
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # get current branch in git repo
 function parse_git_branch {
@@ -112,6 +92,36 @@ function parse_git_dirty {
   fi
 }
 
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+export FZF_DEFAULT_OPTS="
+  --walker-skip .git,node_modules,.nx,__pycache__,.pytest_cache,.venv,.vim,.gradle
+"
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --tmux
+  --walker-skip .git,node_modules,.nx,__pycache__,.pytest_cache,.venv,.vim,.gradle
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --tmux
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# yazi config
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # Prompt with Current directory
 # export PS1="[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m]\$ "
 # export PS1="[\[\e[36m\]\u\[\e[m\]: \[\e[33;1m\]\W\[\e[m\]]\\n\[\e[32m\]\`parse_git_branch\`\[\e[m\]\$ "
@@ -123,7 +133,41 @@ function parse_git_dirty {
 # export PS1="\n{\[\e[34m\]\u\[\e[m\]} \[\e[32m\]@\[\e[m\] {\[\e[34m\]\h\[\e[m\]}: \[\e[32m\]\w\[\e[m\]\n\[\e[32m\]\`parse_git_branch\`\[\e[m\] \[\e[32m\]<\[\e[m\]\[\e[32m\]>\[\e[m\] "
 # export PS1="\n\[\e[33;44m\] \w \[\e[m\]\[\e[34;43m\]\`parse_git_branch\`\[\e[m\]\n \[\e[33m\]\\$\[\e[m\] "
 # export PS1="\n\[\e[30;47m\] \w \[\e[m\]\[\e[44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
-export PS1="\n\[\e[30;47m\][\h] \w \[\e[m\]\[\e[44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+# export PS1="\n\[\e[30;47m\][\h] \w \[\e[m\]\[\e[30;44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+export PS1="\n\e[1;15m\]\[\e[48;5;240m\][\h] \w \[\e[38;5;242m\]\[\e[48;5;214m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+################################################################################
+# Development Environment  Settings
+################################################################################
 
+export JAVA_HOME="$(/usr/libexec/java_home -v 21.0.3)"
+# export ANDROID_HOME=$HOME/Library/Android/sdk
+# export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
+export M2_HOME=/usr/local/Cellar/maven/3.9.6
+export MAVEN_HOME=$M2_HOME
+
+# Homebrew exports
+export LDFLAGS="-L/usr/local/opt/ncurses/lib"
+export CPPFLAGS="-I/usr/local/opt/ncurses/include"
+export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
+
+# Python pyenv support
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Node nvm support
+export NVM_DIR="$HOME/.nvm"
+[[ -s "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
+[[ -s "/usr/local/opt/nvm/etc/bash_completion" ]] && . "/usr/local/opt/nvm/etc/bash_completion" # This loads nvm bash_completion
+
+
+################################################################################
+# PATH Exports
+################################################################################
+export PATH=$HOME/bin:$HOME/dev/tools:$M2_HOME/bin:$JAVA_HOME/bin:$PATH
+# export PATH=$ANDROID_HOME/platform-tools/bin:$ANDROID_HOME/tools:$PATH
+export PATH=$HOME/.local/bin:/usr/local/opt/libpq/bin:$HOME/.poetry/bin:$HOME/dev/tools/platform-tools:$PATH
