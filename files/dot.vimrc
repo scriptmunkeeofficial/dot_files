@@ -30,6 +30,7 @@ Plug 'robbles/logstash.vim'
 Plug 'Yggdroot/indentLine'                      " Visually see indents
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'                   " Git integrations
 
 " Vim UI Enhancements
 Plug 'vim-airline/vim-airline'                  " Vim statusline generator
