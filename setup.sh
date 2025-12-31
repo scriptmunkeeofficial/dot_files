@@ -15,9 +15,9 @@ fi
 ###############################################################################
 
 brew tap universal-ctags/universal-ctags
-brew install iterm2 tmux urlview reattach-to-user-namespace sqlite  wget svn bat bash-completion \
+brew install iterm2 tmux urlview reattach-to-user-namespace sqlite3 wget svn bat bash-completion \
   yazi fzf ffmpeg the_silver_searcher zoxide yq jq htop btop fd gh git-delta nvm pdftohtml \
-  ripgrep sqlite starship reattach-to-user-namespace subversion tree uv
+  ripgrep starship reattach-to-user-namespace subversion tree uv
 brew install --HEAD universal-ctags
 brew install --cask visual-studio-code macvim orbstack tableplus discord raycast disk-inventroy-x keycastr
 
