@@ -6,25 +6,33 @@
 
 # check if Homebrew is installed
 if ! command -v brew 2>&1 >/dev/null; then
-  echo 'Homebrew not install, so lets get that installed first'
+  echo 'Homebrew not installed, so lets get that installed first'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 ###############################################################################
-# Install base applications
+# Install base applications using brew
 ###############################################################################
 
 brew tap universal-ctags/universal-ctags
-brew install tmux urlview reattach-to-user-namespace sqlite vim wget svn bat bash-completion yazi fzf ffmpeg the_silver_searcher zoxide
+brew install iterm2 tmux urlview reattach-to-user-namespace sqlite  wget svn bat bash-completion \
+  yazi fzf ffmpeg the_silver_searcher zoxide yq jq htop btop fd gh git-delta nvm pdftohtml \
+  ripgrep sqlite starship reattach-to-user-namespace subversion tree uv
 brew install --HEAD universal-ctags
-brew install --cask visual-studio-code macvim orbstack tableplus discord raycask rectangle disk-inventroy-x
+brew install --cask visual-studio-code macvim orbstack tableplus discord raycast disk-inventroy-x keycastr
 
 ###############################################################################
 # Install Fonts
 ###############################################################################
 
 brew tap homebrew/cask-fonts
-brew install --cask font-source-code-pro-for-powerline font-anonymous-pro font-liberation-nerd-font font-3270-nerd-font font-anonymice-nerd-font font-menlo-for-powerline
+brew install --cask font-source-code-pro-for-powerline font-anonymous-pro \
+  font-liberation-nerd-font font-3270-nerd-font font-anonymice-nerd-font \
+  font-menlo-for-powerline font-dejavu-sans-mono-nerd-font font-droid-sans-mono-nerd-font \
+  font-roboto-mono-nerd-font font-ubuntu-mono-nerd-font font-ubuntu-nerd-font \
+  font-ubuntu-sans-nerd-font font-victor-mono-nerd-font font-sauce-code-pro-nerd-font \
+  font-jetbrains-mono-nerd-font
+
 
 # No longer needed, but will leave for prosperity
 # if [ ! -d fonts ]; then
@@ -48,6 +56,7 @@ if [ ! -d themes ]; then
 fi
 
 cd themes
+curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Dracula.itermcolors -o Dracula.itermcolors
 curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Hybrid.itermcolors -o Hybrid.itermcolors
 curl https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/nord.itermcolors -o nord.itermcolors
 cd ../
@@ -57,7 +66,7 @@ cd ../
 ###############################################################################
 
 current_path=$(pwd)
-echo "Current Path is: $current_paht"
+echo "Current Path is: $current_path"
 
 if [ ! -d !/.vim/autoload ] ; then
     mkdir -p ~/.vim/autoload ~/.vim/bundle ~/.vim/colors
@@ -76,7 +85,7 @@ fi
 vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 
 # install Coc Extensions
-vim -c "CocInstall -sync coc-json coc-html coc-tsserver coc-phpls coc-python coc-git coc-eslint coc-sql coc-xml coc-yaml |qall"
+vim -c "CocInstall -sync coc-json coc-html coc-tsserver coc-phpls coc-python coc-git coc-eslint coc-sql coc-xml coc-yaml coc-emoji |qall"
 
 ###############################################################################
 # Tmux Setup
@@ -120,7 +129,7 @@ ln -s $current_path/src/tmux-7-dwarfs.sh ~/bin/
 if [ ! -f ~/.bash_profile ]; then
     ln -s $current_path/files/dot.bash_profile ~/.bash_profile
 else
-    'WARNING: .bash_profile already exists'
+    echo 'WARNING: .bash_profile already exists'
 fi
 
 if [ ! -f ~/.local_shell_profile ] || [ ! -L ~/.local_shell_profile ] ; then
@@ -153,3 +162,13 @@ EOF
 else
   echo '~/.local_shell_profile already exists'
 fi
+
+###############################################################################
+# Starship Setup
+###############################################################################
+if [ ! -f ~/.config/starship.toml ]; then
+  ln -s $current_path/files/starship.toml ~/.config/starship.toml
+else
+  echo 'WARNING: Starship config file already exists'
+fi
+
