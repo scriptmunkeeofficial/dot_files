@@ -4,12 +4,17 @@ if [ -f ~/.local_shell_profile ]; then
   source ~/.local_shell_profile
 fi
 
+if [ -f ~/.bashrc ]; then
+  source ~/.bashrc
+fi
+
 ################################################################################
 # Alias options
 ################################################################################
 alias ls='ls -G'
 alias ll='ls -lh'
 alias la='ls -a'
+alias lla='ls -alh'
 alias vg='vagrant'
 alias vgssh='vg ssh'
 alias vgstatus='vg status'
@@ -26,6 +31,7 @@ alias audio-restart='sudo killall coreaudiod'
 if [ -e ~/bin/tmux_default_session.sh ]; then
   alias tmux-default='~/bin/tmux_default_session.sh'
 fi
+alias ecr-tag-search='f() { aws ecr list-images --repository-name "$1" | jq -r --arg tag "$2" '"'"'.imageIds[] | select(.imageTag | contains($tag))'"'"'; }; f'
 
 
 ################################################################################
@@ -38,9 +44,20 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export GREP_OPTIONS='--color=auto'
 export BAT_THEME='gruvbox-dark'
+export EDITOR='vim'
+
+# Homebrew Setup
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Starship Setup
+eval "$(starship init bash)"
+
+# Carapace Setup
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+source <(carapace _carapace)
 
 # bash-completion
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+# [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 # iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
@@ -92,25 +109,35 @@ function parse_git_dirty {
   fi
 }
 
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/ncurses/lib/pkgconfig"
+
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
+
+# Setting fd as the default source for fzf
+# export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix"
+
 export FZF_DEFAULT_OPTS="
-  --walker-skip .git,node_modules,.nx,__pycache__,.pytest_cache,.venv,.vim,.gradle
-"
+  --walker-skip=.git,node_modules,.nx,__pycache__,.pytest_cache,venv,.venv,.vim,.gradle,.nvim,.Trash,.cache,.next,coverage
+  --tmux 80%
+  --border --height=60% --margin=2%"
 
 # Preview file content using bat (https://github.com/sharkdp/bat)
 export FZF_CTRL_T_OPTS="
-  --tmux
-  --walker-skip .git,node_modules,.nx,__pycache__,.pytest_cache,.venv,.vim,.gradle
   --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'
+  "
 
 # CTRL-Y to copy the command into clipboard using pbcopy
 export FZF_CTRL_R_OPTS="
-  --tmux
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
+  --header 'Press CTRL-Y to copy command into clipboard'
+  "
+
+# Adding git options from https://github.com/junegunn/fzf-git.sh
+# User Ctrl+G ? to open help
+source $HOME/tools/fzf-git.sh
 
 # yazi config
 function yy() {
@@ -134,40 +161,44 @@ function yy() {
 # export PS1="\n\[\e[33;44m\] \w \[\e[m\]\[\e[34;43m\]\`parse_git_branch\`\[\e[m\]\n \[\e[33m\]\\$\[\e[m\] "
 # export PS1="\n\[\e[30;47m\] \w \[\e[m\]\[\e[44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
 # export PS1="\n\[\e[30;47m\][\h] \w \[\e[m\]\[\e[30;44m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
-export PS1="\n\e[1;15m\]\[\e[48;5;240m\][\h] \w \[\e[38;5;242m\]\[\e[48;5;214m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+# export PS1="\n\e[1;15m\]\[\e[48;5;240m\][\h] \w \[\e[38;5;242m\]\[\e[48;5;214m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+# export PS1="\n\e[1;15m\]\[\e[48;5;240m\][\h] \w \[\e[38;5;15m\]\[\e[48;5;175m\]\e[1m\]\`parse_git_branch\`\[\e[m\]\n \\$ "
+#export PS1="\[\e]12;#d3869b\a\]\n\e[1;15m\]\[\e[48;5;240m\][\h] \w \[\e[38;5;15m\]\[\e[48;5;175m\]\e[1m\]\`parse_git_branch\`\[\e[m\]\n\[\e[38;5;175m\] \\$> \[\e[m\]"
+
 
 ################################################################################
 # Development Environment  Settings
 ################################################################################
 
-export JAVA_HOME="$(/usr/libexec/java_home -v 21.0.3)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 21.0.9)"
 # export ANDROID_HOME=$HOME/Library/Android/sdk
 # export ANDROID_SDK_HOME=$HOME/Library/Android/sdk
-export M2_HOME=/usr/local/Cellar/maven/3.9.6
+export M2_HOME=/opt/homebrew/Cellar/maven/3.9.9
 export MAVEN_HOME=$M2_HOME
 
 # Homebrew exports
-export LDFLAGS="-L/usr/local/opt/ncurses/lib"
-export CPPFLAGS="-I/usr/local/opt/ncurses/include"
-export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
+# export LDFLAGS="-L$HOMEBREW_PREFIX/opt/ncurses/lib"
+# export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/ncurses/include"
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/libpq/lib/pkgconfig"
 
-# Python pyenv support
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$PYENV_ROOT/shims:$PATH"
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# # Python pyenv support
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH" && export PATH="$PYENV_ROOT/shims:$PATH"
+# eval "$(pyenv init - bash)"
 
 # Node nvm support
 export NVM_DIR="$HOME/.nvm"
-[[ -s "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
-[[ -s "/usr/local/opt/nvm/etc/bash_completion" ]] && . "/usr/local/opt/nvm/etc/bash_completion" # This loads nvm bash_completion
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.bash 2>/dev/null || :
 
 ################################################################################
 # PATH Exports
 ################################################################################
-export PATH=$HOME/bin:$HOME/dev/tools:$M2_HOME/bin:$JAVA_HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/dev/tools:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/go/bin:$PATH
 # export PATH=$ANDROID_HOME/platform-tools/bin:$ANDROID_HOME/tools:$PATH
-export PATH=$HOME/.local/bin:/usr/local/opt/libpq/bin:$HOME/.poetry/bin:$HOME/dev/tools/platform-tools:$PATH
+export PATH=$HOME/.local/bin:$HOMEBREW_PREFIX/opt/libpq/bin:$PATH
+

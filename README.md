@@ -146,15 +146,22 @@ Clone the Git repo
 ## Install the dot files
 ### Automatically
 
-Run setup.sh [ eventually, but until then just copy them accordingly ]
+Run setup.sh or the improved setup_improved.sh script:
 
 ```
-cd [clone location]\dot_files
+cd [clone location]/dot_files
 bash setup.sh
 ```
 
+Or for a more robust experience with better error handling and user prompts:
+
+```
+cd [clone location]/dot_files
+bash setup_improved.sh
+```
+
 ### Manually
-1. Navigate to the `[clone location]\dot_files\files` directory
+1. Navigate to the `[clone location]/dot_files/files` directory
 2. In the dot_files directory open the dot_* file with your favorite editor.
-3. Copy the portions you want to your dot files _(i.e. .vimrc, .tmux_confi, .bash_profile)_
+3. Copy the portions you want to your dot files _(i.e. .vimrc, .tmux.conf, .bash_profile)_
 

@@ -27,3 +27,6 @@ themes/
 
 # Ignore temp files
 *.swp
+
+# Ignore macOs
+.DS_Store
